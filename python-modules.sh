@@ -9,7 +9,7 @@ build_requires:
 env:
   SSL_CERT_FILE: "$(env PYTHONPATH=$PYTHON_MODULES_ROOT/lib/python$(python -c \"import distutils.sysconfig; print(distutils.sysconfig.get_python_version())\")/site-packages:$PYTHONPATH python -c \"import certifi; print certifi.where()\")"
 prepend_path:
-  PYTHONPATH: $PYTHON_MODULES_ROOT/lib/python2.7/site-packages:$PYTHONPATH
+  PYTHONPATH: $PYTHON_MODULES_ROOT/lib/python3.5/site-packages:$PYTHONPATH
 prefer_system: (?!slc5)
 prefer_system_check:
   python -c 'import matplotlib,numpy,certifi,IPython,ipywidgets,ipykernel,notebook.notebookapp,metakernel,yaml';
