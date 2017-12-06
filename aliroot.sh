@@ -1,6 +1,7 @@
 package: AliRoot
 version: "%(commit_hash)s"
-tag: master
+#tag: master
+tag: v5-09-27
 requires:
   - ROOT
   - DPMJET
