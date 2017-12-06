@@ -38,6 +38,10 @@ COMPILER_LD=c++
 [[ "$CXXFLAGS" == *'-std=c++11'* ]] && CXX11=1 || true
 [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CXX14=1 || true
 
+PYTHONEXEC="$(which python3)"
+PYTHONINC="$(python3 -c 'import sysconfig; print(sysconfig.get_path("include"))')"
+PYTHONLIBS="$(python3 -c 'import sysconfig; print(sysconfig.get_path("stdlib"))')"
+
 case $ARCHITECTURE in
   osx*)
     ENABLE_COCOA=1
@@ -128,6 +132,11 @@ else
         ${ALIEN_RUNTIME_VERSION:+-Dmonalisa=ON}                                          \
         -Dkrb5=OFF                                                                       \
         -Dgviz=OFF                                                                       \
+        -Dpython=ON                                                                      \
+        -Dpython3=ON                                                                     \
+        -DPYTHON_EXECUTABLE="${PYTHONEXEC}"                                              \
+        -DPYTHON_LIBRARIES="${PYTHONLIBS}"                                               \
+        -DPYTHON_INCLUDE_DIR="${PYTHONINC}"                                              \
         -DCMAKE_PREFIX_PATH="$FREETYPE_ROOT;$SYS_OPENSSL_ROOT;$GSL_ROOT;$ALIEN_RUNTIME_ROOT;$PYTHON_ROOT;$PYTHON_MODULES_ROOT;$LIBPNG_ROOT;$LZMA_ROOT"
   FEATURES="builtin_pcre mathmore xml ssl opengl minuit2 http
             pythia6 roofit soversion vdt ${CXX11:+cxx11} ${CXX14:+cxx14} ${XROOTD_ROOT:+xrootd}
