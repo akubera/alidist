@@ -19,8 +19,8 @@ prepend_path:
 source: https://github.com/alisw/AliRoot
 incremental_recipe: |
   make ${JOBS:+-j$JOBS} install
-  ctest -R load_library --output-on-failure ${JOBS:+-j $JOBS}
-  rsync -a $SOURCEDIR/test/ $INSTALLROOT/test
+  #ctest -R load_library --output-on-failure ${JOBS:+-j $JOBS}
+  #rsync -a $SOURCEDIR/test/ $INSTALLROOT/test
   [[ $CMAKE_BUILD_TYPE == COVERAGE ]] && mkdir -p "$WORK_DIR/$ARCHITECTURE/profile-data/AliRoot/$PKGVERSION-$PKGREVISION/" && rsync -acv --filter='+ */' --filter='+ *.cpp' --filter='+ *.cc' --filter='+ *.h' --filter='+ *.gcno' --filter='- *' "$BUILDDIR/" "$WORK_DIR/$ARCHITECTURE/profile-data/AliRoot/$PKGVERSION-$PKGREVISION/"
   mkdir -p $INSTALLROOT/etc/modulefiles && rsync -a --delete etc/modulefiles/ $INSTALLROOT/etc/modulefiles
 ---
@@ -61,10 +61,10 @@ cmake $SOURCEDIR                                                     \
 
 make ${IGNORE_ERRORS:+-k} ${JOBS+-j $JOBS} install
 # ctest will succeed if no load_library tests were found
-ctest -R load_library --output-on-failure ${JOBS:+-j $JOBS}
+#ctest -R load_library --output-on-failure ${JOBS:+-j $JOBS}
 [[ $ALICE_DAQ && ! $ALICE_DISABLE_DA_RPMS ]] && { make daqDA-all-rpm && make ${JOBS+-j $JOBS} install; }
 
-rsync -av $SOURCEDIR/test/ $INSTALLROOT/test
+#rsync -av $SOURCEDIR/test/ $INSTALLROOT/test
 
 [[ $CMAKE_BUILD_TYPE == COVERAGE ]]                                                       \
   && mkdir -p "$WORK_DIR/${ARCHITECTURE}/profile-data/AliRoot/$PKGVERSION-$PKGREVISION/"  \
