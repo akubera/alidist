@@ -63,9 +63,11 @@ done > requirements.txt
 # a numpy to be installed separately
 # See also:
 #   https://github.com/scikit-garden/scikit-garden/issues/23
-env PYTHONUSERBASE="$INSTALLROOT" pip3 install --user -IU numpy
+#env PYTHONUSERBASE="$INSTALLROOT" pip3 install --user -IU numpy
+env PYTHONUSERBASE="$INSTALLROOT" python3 -m pip install --user -IU numpy
 
-env PYTHONUSERBASE="$INSTALLROOT" pip3 install --user -IU -r requirements.txt
+#env PYTHONUSERBASE="$INSTALLROOT" pip3 install --user -IU -r requirements.txt
+env PYTHONUSERBASE="$INSTALLROOT" python3 -m pip install --user -IU -r requirements.txt
 
 # Find the proper Python lib library and export it
 pushd "$INSTALLROOT"
@@ -88,7 +90,8 @@ popd
 MATPLOTLIB_TAG="3.0.3"
 if [[ $ARCHITECTURE != slc* ]]; then
   # Simply get it via pip in most cases
-  env PYTHONUSERBASE=$INSTALLROOT pip3 install --user "matplotlib==$MATPLOTLIB_TAG"
+  #env PYTHONUSERBASE=$INSTALLROOT pip3 install "matplotlib==$MATPLOTLIB_TAG"
+  env PYTHONUSERBASE=$INSTALLROOT python3 -m pip install "matplotlib==$MATPLOTLIB_TAG"
 else
 
   # We are on a RHEL-compatible OS. We compile it ourselves, and link it to our dependencies
