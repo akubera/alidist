@@ -16,6 +16,7 @@ cmake $SOURCEDIR                                        \
       ${VC_VERSIOM:+-DVc_LIBRARIES=$VCROOT/lib/libVc.a} \
       -DCMAKE_INSTALL_PREFIX=$INSTALLROOT               \
       -DCMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE"            \
+      -DCMAKE_CXX_FLAGS="-fPIC -g -O2 -std=c++14" \
       -DFIXTARGET=FALSE
 make ${JOBS+-j $JOBS} install
 
