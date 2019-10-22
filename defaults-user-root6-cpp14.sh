@@ -4,9 +4,6 @@ env:
   CXXFLAGS: "-fPIC -g -O2 -march=native -std=c++14"
   CFLAGS: "-fPIC -g -O2"
   CMAKE_BUILD_TYPE: "RELWITHDEBINFO"
-disable:
-  - arrow
-  - treelite
 overrides:
   AliRoot:
     version: "%(tag_basename)s"
