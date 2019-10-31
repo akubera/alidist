@@ -24,22 +24,22 @@ unset PYTHONPATH
 # In order to get the exact versions, you can use `pip freeze` on your local installation.
 PIP_REQUIREMENTS=(
   # pack==version           import_module
-  "requests==2.21.0         requests"
-  "ipykernel==5.1.0         ipykernel"
+  "requests==2.22.0         requests"
+  "ipykernel==5.1.3         ipykernel"
   "ipython==7.4.0           IPython"
-  "ipywidgets==7.4.2        ipywidgets"
-  "metakernel==0.20.14      metakernel"
+  "ipywidgets==7.5.1        ipywidgets"
+  "metakernel==0.24         metakernel"
   "mock==2.0.0              mock"
-  "notebook==5.7.8          notebook.notebookapp"
-  "numpy==1.16.2            numpy"
-  "pandas==0.24.2           pandas"
-  "PyYAML==5.1              yaml"
-  "scikit-learn==0.20.3     sklearn"
-  "scipy==1.2.1             scipy"
+  "notebook==6.0.1          notebook.notebookapp"
+  "numpy==1.17.3            numpy"
+  "pandas==0.25.2           pandas"
+  "PyYAML==5.1.             yaml"
+  "scikit-learn==0.21.3     sklearn"
+  "scipy==1.3.1             scipy"
   "uproot==3.4.18           uproot"
   )
 
-if python3 -c 'import sys; exit(0 if 1000*sys.version_info.major + sys.version_info.minor >= 3006 else 1)' && [[ $ARCHITECTURE != slc6* ]]; then
+if python3 -c 'import sys; exit(0 if False and 1000*sys.version_info.major + sys.version_info.minor >= 3006 else 1)' && [[ $ARCHITECTURE != slc6* ]]; then
   # Install some ML-specific packages only with Python 3.6 at the moment
   PIP_REQUIREMENTS+=(
     "seaborn==0.9.0           seaborn"
@@ -64,10 +64,10 @@ done > requirements.txt
 # See also:
 #   https://github.com/scikit-garden/scikit-garden/issues/23
 #env PYTHONUSERBASE="$INSTALLROOT" pip3 install --user -IU numpy
-env PYTHONUSERBASE="$INSTALLROOT" python3 -m pip install --user -IU numpy
+env PYTHONUSERBASE="$INSTALLROOT" python3 -m pip install --user numpy
 
 #env PYTHONUSERBASE="$INSTALLROOT" pip3 install --user -IU -r requirements.txt
-env PYTHONUSERBASE="$INSTALLROOT" python3 -m pip install --user -IU -r requirements.txt
+env PYTHONUSERBASE="$INSTALLROOT" python3 -m pip install --user -r requirements.txt
 
 # Find the proper Python lib library and export it
 pushd "$INSTALLROOT"
@@ -87,7 +87,7 @@ pushd "$INSTALLROOT"
 popd
 
 # Install matplotlib (quite tricky)
-MATPLOTLIB_TAG="3.0.3"
+MATPLOTLIB_TAG="3.1.1"
 if [[ $ARCHITECTURE != slc* ]]; then
   # Simply get it via pip in most cases
   #env PYTHONUSERBASE=$INSTALLROOT pip3 install "matplotlib==$MATPLOTLIB_TAG"
