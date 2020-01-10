@@ -21,7 +21,7 @@ unset PYTHONPATH
 
 # PIP_REQUIREMENTS & PIP36_REQUIREMENTS come from Python-modules-list
 echo $PIP_REQUIREMENTS | tr \  \\n > requirements.txt
-if python3 -c 'import sys; exit(0 if 1000*sys.version_info.major + sys.version_info.minor >= 3006 else 1)' && [[ $ARCHITECTURE != slc6* ]]; then
+if python3 -c 'import sys; exit(sys.version_info < (3, 6))' && [[ $ARCHITECTURE != slc6* ]]; then
   echo $PIP36_REQUIREMENTS | tr \  \\n >> requirements.txt
 fi
 
@@ -41,7 +41,7 @@ pushd "$PYTHON_MODULES_INSTALLROOT"
   if [[ -d lib64 ]]; then
     ln -nfs lib64 lib  # creates lib pointing to lib64
   elif [[ -d lib ]]; then
-       ln -nfs lib lib64 # creates lib64 pointing to lib
+    ln -nfs lib lib64 # creates lib64 pointing to lib
   fi
   pushd lib
     ln -nfs python$PYVER python
