@@ -34,7 +34,7 @@ mkdir -p $PYTHON_MODULES_INSTALLROOT
 # See also:
 #   https://github.com/scikit-garden/scikit-garden/issues/23
 grep RootInteractive requirements.txt && env PYTHONUSERBASE="$PYTHON_MODULES_INSTALLROOT" pip3 install --user -IU numpy
-env PYTHONUSERBASE="$PYTHON_MODULES_INSTALLROOT" pip3 install --user -IU -r requirements.txt
+env PYTHONUSERBASE="$PYTHON_MODULES_INSTALLROOT" pip3 install --user --no-warn-script-location -IU -r requirements.txt
 
 # Find the proper Python lib library and export it
 pushd "$PYTHON_MODULES_INSTALLROOT"
