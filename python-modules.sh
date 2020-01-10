@@ -53,6 +53,10 @@ pushd "$PYTHON_MODULES_INSTALLROOT"
   popd
 popd
 
+
+# install matplotlib manually if not in requirements.txt
+if ! grep matplotlib requirements.txt; then
+
 # Install matplotlib (quite tricky)
 MATPLOTLIB_TAG="3.0.3"
 if [[ $ARCHITECTURE != slc* ]]; then
@@ -89,6 +93,8 @@ EOF
     python3 setup.py install --prefix "$PYTHON_MODULES_INSTALLROOT"
   unset PYTHONPATH
 fi
+
+fi # "matplotlib" in requirements.txt
 
 # Test if matplotlib can be loaded
 env PYTHONPATH="$PYTHON_MODULES_INSTALLROOT/lib/python/site-packages" python3 -c 'import matplotlib'
